@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KALA — Contemporary Indian Craft & Design</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Cormorant Garamond (Editorial Serif) & Plus Jakarta Sans (Modern Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#FAF8F5',       /* Warm off-white / ivory */
+                            card: '#F3EFEA',     /* Soft neutral stone */
+                            dark: '#1A1918',     /* Deep charcoal text */
+                            terracotta: '#C85A3E', /* Indian earth accent */
+                            ochre: '#C09249',    /* Warm brass tone */
+                            indigo: '#1E293B',   /* Slate indigo tone */
+                            muted: '#8A857B',    /* Secondary typography */
+                            border: '#E5DFD5'    /* Elegant subtle border */
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Smooth Scrollbar and Fine Typography Touches */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF8F5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C85A3E;
+            border-radius: 3px;
+        }
+        
+        .image-zoom-container {
+            overflow: hidden;
+        }
+        .image-zoom-container img {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .image-zoom-container:hover img {
+            transform: scale(1.05);
+        }
+        
+        .editorial-shadow {
+            box-shadow: 0 20px 40px -15px rgba(26, 25, 24, 0.07);
+        }
+
+        .glass-nav {
+            background: rgba(250, 248, 245, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-dark font-sans antialiased selection:bg-brand-terracotta selection:text-white">
+
+    <!-- COMPETITION / REBRANDING STRATEGY BANNER -->
+    <div class="bg-brand-dark text-white text-xs tracking-widest uppercase py-2.5 px-4 sticky top-0 z-50 border-b border-white/10 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <span class="inline-block w-2 h-2 rounded-full bg-brand-terracotta animate-pulse"></span>
+            <span class="font-medium">KALA Rebranding Concept & Prototype</span>
+            <span class="hidden md:inline opacity-60">| Moving from Traditional Marketplace → Contemporary Indian Design Brand</span>
+        </div>
+        <button onclick="toggleStrategyModal()" class="underline hover:text-brand-ochre transition text-[11px] font-semibold flex items-center gap-1.5">
+            <i class="fa-solid fa-lightbulb text-brand-ochre"></i>
+            View Rebranding Strategy & ROI
+        </button>
+    </div>
+
+    <!-- MAIN NAVIGATION -->
+    <header class="glass-nav sticky top-9 z-40 border-b border-brand-border/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
+            
+            <!-- Left Navigation Links -->
+            <nav class="hidden lg:flex items-center gap-8 text-xs uppercase tracking-widest font-medium text-brand-dark/80">
+                <a href="#discover" class="hover:text-brand-terracotta transition py-1 border-b border-transparent hover:border-brand-terracotta">Discover</a>
+                <a href="#edit" class="hover:text-brand-terracotta transition py-1 border-b border-transparent hover:border-brand-terracotta">The Edit</a>
+                <a href="#process" class="hover:text-brand-terracotta transition py-1 border-b border-transparent hover:border-brand-terracotta">How It's Made</a>
+                <a href="#makers" class="hover:text-brand-terracotta transition py-1 border-b border-transparent hover:border-brand-terracotta">Makers</a>
+            </nav>
+
+            <!-- Brand Logo Center -->
+            <a href="#" class="text-3xl md:text-4xl font-serif tracking-widest uppercase font-bold text-brand-dark hover:opacity-90 transition">
+                KALA<span class="text-brand-terracotta font-sans text-xs align-super ml-0.5">®</span>
+            </a>
+
+            <!-- Right Navigation & Actions -->
+            <div class="flex items-center gap-6">
+                <nav class="hidden lg:flex items-center gap-8 text-xs uppercase tracking-widest font-medium text-brand-dark/80 mr-4">
+                    <a href="#lifestyle" class="hover:text-brand-terracotta transition">How It Lives</a>
+                    <a href="#journal" class="hover:text-brand-terracotta transition">Journal</a>
+                    <a href="#editions" class="hover:text-brand-terracotta transition text-brand-terracotta font-semibold">Editions</a>
+                </nav>
+
+                <button onclick="toggleSearch()" class="p-2 text-brand-dark hover:text-brand-terracotta transition" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                </button>
+                
+                <button onclick="toggleCart()" class="p-2 text-brand-dark hover:text-brand-terracotta transition relative" aria-label="Bag">
+                    <i class="fa-solid fa-bag-shopping text-lg"></i>
+                    <span id="cart-count" class="absolute top-0 right-0 bg-brand-terracotta text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">2</span>
+                </button>
+
+                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-brand-dark" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars-staggered text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU OVERLAY -->
+    <div id="mobile-menu" class="fixed inset-0 bg-brand-dark/95 z-50 text-white p-8 hidden flex-col justify-between lg:hidden transition-all duration-300">
+        <div class="flex justify-between items-center border-b border-white/10 pb-6">
+            <span class="text-2xl font-serif tracking-widest">KALA</span>
+            <button onclick="toggleMobileMenu()" class="text-2xl"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="flex flex-col gap-6 text-xl font-serif tracking-wider">
+            <a href="#discover" onclick="toggleMobileMenu()" class="hover:text-brand-ochre transition">Discover</a>
+            <a href="#edit" onclick="toggleMobileMenu()" class="hover:text-brand-ochre transition">The Edit (Curated Collection)</a>
+            <a href="#process" onclick="toggleMobileMenu()" class="hover:text-brand-ochre transition">See How It's Made</a>
+            <a href="#lifestyle" onclick="toggleMobileMenu()" class="hover:text-brand-ochre transition">How It Lives in Modern Interiors</a>
+            <a href="#makers" onclick="toggleMobileMenu()" class="hover:text-brand-ochre transition">Meet The Artisans</a>
+            <a href="#journal" onclick="toggleMobileMenu()" class="hover:text-brand-ochre transition">The KALA Journal</a>
+            <a href="#editions" onclick="toggleMobileMenu()" class="hover:text-brand-ochre transition text-brand-ochre">Limited KALA Editions</a>
+        </div>
+        <div class="border-t border-white/10 pt-6 text-xs text-white/60 flex justify-between items-center">
+            <span>Contemporary Indian Design & Heritage</span>
+            <button onclick="toggleStrategyModal(); toggleMobileMenu();" class="text-brand-ochre underline">Strategy Deck</button>
+        </div>
+    </div>
+
+    <!-- 1. HERO SECTION -->
+    <section id="discover" class="relative min-h-[90vh] flex items-center justify-center pt-8 pb-16 px-6 md:px-12 bg-gradient-to-b from-brand-bg via-brand-bg to-brand-card/40">
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Hero Content (5 Cols) -->
+            <div class="lg:col-span-5 space-y-8 z-10">
+                <div class="inline-flex items-center gap-3 px-3 py-1.5 rounded-full bg-brand-terracotta/10 border border-brand-terracotta/20 text-brand-terracotta text-xs font-medium tracking-widest uppercase">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-terracotta"></span>
+                    Reimagining Heritage Craft
+                </div>
+
+                <h1 class="text-5xl sm:text-6xl xl:text-7xl font-serif font-light tracking-tight leading-[1.08] text-brand-dark">
+                    Indian craft, <br/>
+                    <em class="font-normal italic text-brand-terracotta">reimagined</em> for today.
+                </h1>
+
+                <p class="text-base sm:text-lg text-brand-dark/75 font-light leading-relaxed max-w-lg">
+                    Discover the people, slow human processes, and modern design thinking behind contemporary Indian artisanal mastery.
+                </p>
+
+                <div class="pt-2 flex flex-wrap gap-4 items-center">
+                    <a href="#edit" class="px-8 py-4 bg-brand-dark text-white text-xs uppercase tracking-widest font-semibold rounded-none hover:bg-brand-terracotta transition-colors duration-300 shadow-md">
+                        Explore The Edit
+                    </a>
+                    <a href="#process" class="px-8 py-4 border border-brand-dark text-brand-dark text-xs uppercase tracking-widest font-semibold hover:bg-brand-dark hover:text-white transition-colors duration-300">
+                        See How It's Made
+                    </a>
+                </div>
+
+                <div class="pt-8 border-t border-brand-border flex items-center gap-8 text-xs text-brand-muted tracking-wide">
+                    <div>
+                        <span class="block text-xl font-serif text-brand-dark font-medium">100%</span>
+                        Traceable Craft Guilds
+                    </div>
+                    <div class="w-px h-8 bg-brand-border"></div>
+                    <div>
+                        <span class="block text-xl font-serif text-brand-dark font-medium">18+</span>
+                        Indian Craft Regions
+                    </div>
+                    <div class="w-px h-8 bg-brand-border"></div>
+                    <div>
+                        <span class="block text-xl font-serif text-brand-dark font-medium">Fair Equity</span>
+                        Direct Artisan Share
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Visual (7 Cols) -->
+            <div class="lg:col-span-7 relative">
+                <div class="relative image-zoom-container rounded-sm shadow-2xl bg-brand-card">
+                    <img 
+                        src="images/vessel.png" 
+                        alt="Jaipur Blue Pottery Vessel in Modern Minimalist Interior"
+                        class="w-full h-[550px] sm:h-[650px] object-cover"
+                        onerror="this.src='https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&w=1200&q=80'"
+                    />
+                    
+                    <!-- Editorial Overlay Tag -->
+                    <div class="absolute bottom-6 left-6 right-6 p-6 glass-nav border border-white/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div>
+                            <span class="text-[10px] uppercase tracking-widest text-brand-terracotta font-bold block">Featured Piece</span>
+                            <h3 class="text-xl font-serif font-medium text-brand-dark">Jaipur Blue Cobalt Sculptural Vessel</h3>
+                            <p class="text-xs text-brand-muted mt-0.5">Jaipur Quartz & Glass Frit Technique • Modern Living Space Integration</p>
+                        </div>
+                        <a href="https://www.google.com/imgres?q=Jaipur%20Blue%20Cobalt%20Sculptural%20Vessel&imgurl=https%3A%2F%2Fmedia.assettype.com%2Foutlooktraveller%2Fimport%2Foutlooktraveller%2Fpublic%2Fuploads%2Farticles%2Fexplore%2Fshutterstock_1596511075.jpg%3Fw%3D1000%26auto%3Dformat%252Ccompress%26fit%3Dmax%26format%3Dwebp%26dpr%3D1.0&imgrefurl=https%3A%2F%2Fwww.outlooktraveller.com%2Fexperiences%2Fheritage%2Fjaipur-blue-pottery-a-story-of-no-clay-pottery&docid=0fsvGxA064IEVM&tbnid=FH6nz_fupuvjtM&vet=12ahUKEwiHuoWTi4qXAxU_SmwGHQXDBBkQnPAOegUImAEQAA..i&w=1000&h=649&hcb=2&ved=2ahUKEwiHuoWTi4qXAxU_SmwGHQXDBBkQnPAOegUImAEQAA" class="text-xs font-semibold uppercase tracking-wider text-brand-dark hover:text-brand-terracotta flex items-center gap-2 whitespace-nowrap">
+                            View Craft Specs <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Floating Accent Card -->
+                <div class="hidden sm:block absolute -top-6 -left-6 bg-white p-5 border border-brand-border shadow-xl max-w-[200px]">
+                    <div class="text-3xl font-serif text-brand-terracotta">42 Hours</div>
+                    <div class="text-[11px] text-brand-muted mt-1 uppercase tracking-wider font-semibold">Hand Craftsmanship per Vessel</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 2. "NOT JUST A PRODUCT" SECTION -->
+    <section class="py-24 px-6 md:px-12 bg-white border-y border-brand-border">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-semibold uppercase tracking-widest text-brand-terracotta block mb-3">Our Core Philosophy</span>
+                <h2 class="text-4xl sm:text-5xl font-serif font-light text-brand-dark">
+                    Every piece has a story before it becomes a product.
+                </h2>
+                <p class="text-brand-muted text-sm sm:text-base mt-4 font-light">
+                    Unlike mass production designed for disposability, KALA objects honor the slow, human continuum from raw earth to modern utility.
+                </p>
+            </div>
+
+            <!-- Value Sequence Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 relative">
+                
+                <!-- Stage 1 -->
+                <div class="bg-brand-bg p-6 border border-brand-border flex flex-col justify-between hover:border-brand-terracotta/50 transition group">
+                    <div>
+                        <div class="text-xs font-mono text-brand-terracotta font-bold mb-4">01 / MATERIAL</div>
+                        <h3 class="text-lg font-serif font-semibold text-brand-dark mb-2">Raw Sourcing</h3>
+                        <p class="text-xs text-brand-muted leading-relaxed">
+                            Natural Multani clay, wild Mulberry silk, Bankura riverbed earth, and lead-free quartz frit.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-brand-border/60 text-[11px] uppercase tracking-wider text-brand-dark/70 font-medium">
+                        100% Organic & Local
+                    </div>
+                </div>
+
+                <!-- Stage 2 -->
+                <div class="bg-brand-bg p-6 border border-brand-border flex flex-col justify-between hover:border-brand-terracotta/50 transition group">
+                    <div>
+                        <div class="text-xs font-mono text-brand-terracotta font-bold mb-4">02 / HANDS</div>
+                        <h3 class="text-lg font-serif font-semibold text-brand-dark mb-2">Master Guilds</h3>
+                        <p class="text-xs text-brand-muted leading-relaxed">
+                            Shaped by multi-generational artisan families preserving ancient muscle memory.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-brand-border/60 text-[11px] uppercase tracking-wider text-brand-dark/70 font-medium">
+                        Artisan Guild Equity
+                    </div>
+                </div>
+
+                <!-- Stage 3 -->
+                <div class="bg-brand-bg p-6 border border-brand-border flex flex-col justify-between hover:border-brand-terracotta/50 transition group">
+                    <div>
+                        <div class="text-xs font-mono text-brand-terracotta font-bold mb-4">03 / TECHNIQUE</div>
+                        <h3 class="text-lg font-serif font-semibold text-brand-dark mb-2">Heritage Guilds</h3>
+                        <p class="text-xs text-brand-muted leading-relaxed">
+                            Lost-wax casting, hand-spinning Pashmina, double-Ikat resist dyeing, and hand-chiseling.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-brand-border/60 text-[11px] uppercase tracking-wider text-brand-dark/70 font-medium">
+                        UNESCO Craft Heritage
+                    </div>
+                </div>
+
+                <!-- Stage 4 -->
+                <div class="bg-brand-bg p-6 border border-brand-border flex flex-col justify-between hover:border-brand-terracotta/50 transition group">
+                    <div>
+                        <div class="text-xs font-mono text-brand-terracotta font-bold mb-4">04 / TIME</div>
+                        <h3 class="text-lg font-serif font-semibold text-brand-dark mb-2">Patient Craft</h3>
+                        <p class="text-xs text-brand-muted leading-relaxed">
+                             Crafted through a slower, rhythmic human process taking anywhere from 14 to 120 days.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-brand-border/60 text-[11px] uppercase tracking-wider text-brand-dark/70 font-medium">
+                        Zero Mass Hurry
+                    </div>
+                </div>
+
+                <!-- Stage 5 -->
+                <div class="bg-brand-bg p-6 border border-brand-border flex flex-col justify-between hover:border-brand-terracotta/50 transition group">
+                    <div>
+                        <div class="text-xs font-mono text-brand-terracotta font-bold mb-4">05 / DESIGN</div>
+                        <h3 class="text-lg font-serif font-semibold text-brand-dark mb-2">Modern Utility</h3>
+                        <p class="text-xs text-brand-muted leading-relaxed">
+                            Reinterpreted into minimalist forms tailored for modern urban architectures.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-brand-border/60 text-[11px] uppercase tracking-wider text-brand-dark/70 font-medium">
+                        Minimalist Ergonomics
+                    </div>
+                </div>
+
+                <!-- Stage 6 -->
+                <div class="bg-brand-terracotta text-white p-6 flex flex-col justify-between shadow-lg">
+                    <div>
+                        <div class="text-xs font-mono text-white/80 font-bold mb-4">06 / THE OBJECT</div>
+                        <h3 class="text-lg font-serif font-semibold mb-2">Enduring Heirloom</h3>
+                        <p class="text-xs text-white/80 leading-relaxed">
+                            A tactile centerpiece that brings warmth, soul, and provenance into everyday modern living.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/20 text-[11px] uppercase tracking-wider font-semibold">
+                        Lifetime Belonging
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. “SEE IT BEING MADE” / PROCESS SHOWCASE -->
+    <section id="process" class="py-24 px-6 md:px-12 bg-brand-bg">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-widest text-brand-terracotta block mb-2">Tactile Heritage</span>
+                    <h2 class="text-4xl sm:text-5xl font-serif text-brand-dark">From Earth to Living Object</h2>
+                </div>
+                <p class="text-sm text-brand-muted max-w-md font-light">
+                    Follow the step-by-step transformation of raw materials into curated design pieces. Interactive process breakdown for <strong class="text-brand-dark font-medium">Jaipur Blue Quartz Pottery</strong>.
+                </p>
+            </div>
+
+            <!-- Interactive Stepper Component -->
+            <div class="bg-white border border-brand-border p-6 md:p-12 shadow-sm">
+                
+                <!-- Process Navigation Tabs -->
+                <div class="flex overflow-x-auto gap-4 pb-4 border-b border-brand-border mb-8 no-scrollbar" id="process-step-tabs">
+                    <button onclick="setProcessStep(0)" class="process-tab-btn flex-shrink-0 px-5 py-3 text-xs uppercase tracking-wider font-semibold border-b-2 border-brand-terracotta text-brand-terracotta">
+                        01. Clay & Frit Prep
+                    </button>
+                    <button onclick="setProcessStep(1)" class="process-tab-btn flex-shrink-0 px-5 py-3 text-xs uppercase tracking-wider font-semibold border-b-2 border-transparent text-brand-muted hover:text-brand-dark">
+                        02. Hand Moulding
+                    </button>
+                    <button onclick="setProcessStep(2)" class="process-tab-btn flex-shrink-0 px-5 py-3 text-xs uppercase tracking-wider font-semibold border-b-2 border-transparent text-brand-muted hover:text-brand-dark">
+                        03. Oxide Motifs
+                    </button>
+                    <button onclick="setProcessStep(3)" class="process-tab-btn flex-shrink-0 px-5 py-3 text-xs uppercase tracking-wider font-semibold border-b-2 border-transparent text-brand-muted hover:text-brand-dark">
+                        04. Glaze & Kiln
+                    </button>
+                    <button onclick="setProcessStep(4)" class="process-tab-btn flex-shrink-0 px-5 py-3 text-xs uppercase tracking-wider font-semibold border-b-2 border-transparent text-brand-muted hover:text-brand-dark">
+                        05. Hand Polish
+                    </button>
+                </div>
+
+                <!-- Process Display Content Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center" id="process-display">
+                    
+                    <!-- Left: Large Process Visual -->
+                    <div class="lg:col-span-7 relative image-zoom-container bg-brand-card rounded-sm overflow-hidden min-h-[380px]">
+                        <img 
+                            id="process-img" 
+                            src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1200&q=80" 
+                            alt="Preparation of Quartz Earth and Multani Clay"
+                            class="w-full h-[400px] object-cover"
+                        />
+                        <div class="absolute top-4 left-4 bg-brand-dark/80 backdrop-blur-md text-white text-[11px] uppercase tracking-widest px-3 py-1.5 font-medium">
+                            Step <span id="process-step-num">01</span> / 05
+                        </div>
+                    </div>
+
+                    <!-- Right: Step Narrative -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <span id="process-craft-tag" class="text-xs font-mono uppercase tracking-widest text-brand-terracotta font-semibold">
+                            Material Preparation • Jaipur, Rajasthan
+                        </span>
+                        
+                        <h3 id="process-title" class="text-3xl font-serif font-medium text-brand-dark">
+                            Formulating the Dough-less Quartz Blend
+                        </h3>
+
+                        <p id="process-desc" class="text-sm text-brand-muted leading-relaxed font-light">
+                            Unlike traditional pottery, Jaipur Blue Pottery uses no clay. Quartz powder, glass frit, Multani Mitti (Fuller's Earth), and natural gum are combined by hand to create a smooth, resilient paste.
+                        </p>
+
+                        <!-- Key Metrics Bar -->
+                        <div class="grid grid-cols-2 gap-4 py-4 border-y border-brand-border text-xs">
+                            <div>
+                                <span class="block text-brand-muted uppercase text-[10px] tracking-wider">Artisan Expertise</span>
+                                <span id="process-stat-1" class="font-semibold text-brand-dark mt-0.5 block">Abdul Latif & Guild</span>
+                            </div>
+                            <div>
+                                <span class="block text-brand-muted uppercase text-[10px] tracking-wider">Time Invested</span>
+                                <span id="process-stat-2" class="font-semibold text-brand-dark mt-0.5 block">3 Days Drying & Aging</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 flex items-center justify-between">
+                            <button onclick="nextProcessStep()" class="text-xs uppercase tracking-widest font-bold text-brand-dark hover:text-brand-terracotta flex items-center gap-2">
+                                Next Step <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+
+                            <a href="kala.mp4"
+   target="_blank"
+   class="text-xs uppercase tracking-wider text-brand-terracotta underline hover:text-brand-dark flex items-center gap-1.5 font-semibold">
+    <i class="fa-solid fa-circle-play text-sm"></i>
+    Watch Workshop Reel (1:45)
+</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4. PRODUCT SECTION — THE KALA EDIT -->
+    <section id="edit" class="py-24 px-6 md:px-12 bg-white border-t border-brand-border">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-widest text-brand-terracotta block mb-2">Curated Catalogue</span>
+                    <h2 class="text-4xl sm:text-5xl font-serif text-brand-dark">The KALA Edit</h2>
+                    <p class="text-sm text-brand-muted mt-2 font-light">
+                        Not a mass catalog. A highly selective collection of 10 iconic Indian handicrafts re-engineered for modern lifestyle aesthetics.
+                    </p>
+                </div>
+
+                <!-- Collection Filter Tabs -->
+                <div class="flex flex-wrap gap-2 text-xs uppercase tracking-wider">
+                    <button onclick="filterProducts('all')" class="prod-filter-btn px-4 py-2 border border-brand-dark bg-brand-dark text-white font-medium">All Curations</button>
+                    <button onclick="filterProducts('home')" class="prod-filter-btn px-4 py-2 border border-brand-border hover:border-brand-dark text-brand-dark">New Indian Home</button>
+                    <button onclick="filterProducts('apparel')" class="prod-filter-btn px-4 py-2 border border-brand-border hover:border-brand-dark text-brand-dark">Woven Heritage</button>
+                    <button onclick="filterProducts('acc')" class="prod-filter-btn px-4 py-2 border border-brand-border hover:border-brand-dark text-brand-dark">Adornments & Wear</button>
+                </div>
+            </div>
+
+            <!-- Product Grid (Rich Authentic Handicrafts) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="product-grid">
+                
+                <!-- PRODUCT CARD 1: Jaipur Blue Pottery -->
+                <div class="product-item group bg-brand-bg border border-brand-border p-5 transition-all duration-300 hover:shadow-xl hover:border-brand-terracotta/40" data-category="home">
+                    <div class="relative image-zoom-container bg-white overflow-hidden mb-5">
+                        <img 
+                            src="images/vessel.png" 
+                            alt="Jaipur Blue Pottery Vessel"
+                            class="w-full h-80 object-cover"
+                            onerror="this.src='https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=800&q=80'"
+                        />
+                        <span class="absolute top-3 left-3 bg-brand-dark text-white text-[10px] font-mono px-2.5 py-1 uppercase tracking-wider">
+                            Jaipur Craft
+                        </span>
+                        <button onclick="quickAdd('Jaipur Blue Cobalt Sculptural Vessel', 4800)" class="absolute bottom-3 right-3 bg-white text-brand-dark p-3 rounded-full shadow-md hover:bg-brand-terracotta hover:text-white transition">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-serif text-xl font-medium text-brand-dark group-hover:text-brand-terracotta transition">Jaipur Blue Cobalt Sculptural Vessel</h3>
+                            <span class="font-mono text-sm font-semibold text-brand-dark">₹4,800</span>
+                        </div>
+                        <p class="text-xs text-brand-muted">Craft: Quartz & Glass Frit Firing • Master Guild, Jaipur</p>
+                        <p class="text-xs text-brand-dark/80 line-clamp-2 font-light pt-1">
+                            Minimalist cylindrical geometry adorned with natural cobalt floral motifs. Designed for contemporary console tables.
+                        </p>
+                        <div class="pt-4 flex items-center justify-between border-t border-brand-border/60">
+                            <button onclick="openProductModal('blue-pottery')" class="text-xs font-semibold uppercase tracking-wider text-brand-terracotta hover:underline flex items-center gap-1">
+                                Explore The Piece <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                            <span class="text-[10px] font-mono text-brand-muted">42 Hrs Handcraft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRODUCT CARD 2: Kanjeevaram Handloom Silk -->
+                <div class="product-item group bg-brand-bg border border-brand-border p-5 transition-all duration-300 hover:shadow-xl hover:border-brand-terracotta/40" data-category="apparel">
+                    <div class="relative image-zoom-container bg-white overflow-hidden mb-5">
+                        <img 
+                            src="images/silk.png" 
+                            alt="Kanjeevaram Handloom Silk Throw"
+                            class="w-full h-80 object-cover"
+                            onerror="this.src='https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=800&q=80'"
+                        />
+                        <span class="absolute top-3 left-3 bg-brand-dark text-white text-[10px] font-mono px-2.5 py-1 uppercase tracking-wider">
+                            Kanchipuram Silk
+                        </span>
+                        <button onclick="quickAdd('Monochrome Kanjeevaram Silk Architectural Throw', 18500)" class="absolute bottom-3 right-3 bg-white text-brand-dark p-3 rounded-full shadow-md hover:bg-brand-terracotta hover:text-white transition">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-serif text-xl font-medium text-brand-dark group-hover:text-brand-terracotta transition">Monochrome Kanjeevaram Silk Throw</h3>
+                            <span class="font-mono text-sm font-semibold text-brand-dark">₹18,500</span>
+                        </div>
+                        <p class="text-xs text-brand-muted">Craft: Mulberry Silk Korvai Weave • Smt. Kamala Devi, Tamil Nadu</p>
+                        <p class="text-xs text-brand-dark/80 line-clamp-2 font-light pt-1">
+                            Subtle muted gold zari woven into a structured dark slate layout. Drapes effortlessly on modern sofas or evening couture.
+                        </p>
+                        <div class="pt-4 flex items-center justify-between border-t border-brand-border/60">
+                            <button onclick="openProductModal('kanjeevaram')" class="text-xs font-semibold uppercase tracking-wider text-brand-terracotta hover:underline flex items-center gap-1">
+                                Explore The Piece <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                            <span class="text-[10px] font-mono text-brand-muted">14 Days Weaving</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRODUCT CARD 3: Kashmiri Pashmina Hand-Spun Shawl -->
+                <div class="product-item group bg-brand-bg border border-brand-border p-5 transition-all duration-300 hover:shadow-xl hover:border-brand-terracotta/40" data-category="apparel">
+                    <div class="relative image-zoom-container bg-white overflow-hidden mb-5">
+                        <img 
+                            src="images/pashmina.png" 
+                            alt="Kashmiri Pashmina Ombré Wrap"
+                            class="w-full h-80 object-cover"
+                            onerror="this.src='https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?auto=format&fit=crop&w=800&q=80'"
+                        />
+                        <span class="absolute top-3 left-3 bg-brand-dark text-white text-[10px] font-mono px-2.5 py-1 uppercase tracking-wider">
+                            Kashmir Pashmina
+                        </span>
+                        <button onclick="quickAdd('Hand-Spun Kashmiri Pashmina Minimal Wrap', 24000)" class="absolute bottom-3 right-3 bg-white text-brand-dark p-3 rounded-full shadow-md hover:bg-brand-terracotta hover:text-white transition">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-serif text-xl font-medium text-brand-dark group-hover:text-brand-terracotta transition">Kashmiri Hand-Spun Pashmina Wrap</h3>
+                            <span class="font-mono text-sm font-semibold text-brand-dark">₹24,000</span>
+                        </div>
+                        <p class="text-xs text-brand-muted">Craft: Hand-spun Changthangi Cashmere • Srinagar Weavers</p>
+                        <p class="text-xs text-brand-dark/80 line-clamp-2 font-light pt-1">
+                            Featherweight 12-micron natural Pashmina with hand-twisted subtle raw fringes. Minimalist neutral shade gradient.
+                        </p>
+                        <div class="pt-4 flex items-center justify-between border-t border-brand-border/60">
+                            <button onclick="openProductModal('pashmina')" class="text-xs font-semibold uppercase tracking-wider text-brand-terracotta hover:underline flex items-center gap-1">
+                                Explore The Piece <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                            <span class="text-[10px] font-mono text-brand-muted">180 Hours Spin</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRODUCT CARD 4: Bankura Dhokra Lost-Wax Sculpture -->
+                <div class="product-item group bg-brand-bg border border-brand-border p-5 transition-all duration-300 hover:shadow-xl hover:border-brand-terracotta/40" data-category="home">
+                    <div class="relative image-zoom-container bg-white overflow-hidden mb-5">
+                        <img 
+                            src="images/dhokra.png" 
+                            alt="Bankura Dhokra Lost Wax Brass Art"
+                            class="w-full h-80 object-cover"
+                            onerror="this.src='https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80'"
+                        />
+                        <span class="absolute top-3 left-3 bg-brand-dark text-white text-[10px] font-mono px-2.5 py-1 uppercase tracking-wider">
+                            Bengal Dhokra
+                        </span>
+                        <button onclick="quickAdd('Bankura Dhokra Minimalist Geometric Brass Totem', 7200)" class="absolute bottom-3 right-3 bg-white text-brand-dark p-3 rounded-full shadow-md hover:bg-brand-terracotta hover:text-white transition">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-serif text-xl font-medium text-brand-dark group-hover:text-brand-terracotta transition">Bankura Dhokra Geometric Brass Sculpture</h3>
+                            <span class="font-mono text-sm font-semibold text-brand-dark">₹7,200</span>
+                        </div>
+                        <p class="text-xs text-brand-muted">Craft: 4,000-Year Lost-Wax Brass Casting • Bankura, Bengal</p>
+                        <p class="text-xs text-brand-dark/80 line-clamp-2 font-light pt-1">
+                            Non-ferrous recycled brass molded over beeswax structures. Unique one-of-one tactile desktop artwork.
+                        </p>
+                        <div class="pt-4 flex items-center justify-between border-t border-brand-border/60">
+                            <button onclick="openProductModal('dhokra')" class="text-xs font-semibold uppercase tracking-wider text-brand-terracotta hover:underline flex items-center gap-1">
+                                Explore The Piece <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                            <span class="text-[10px] font-mono text-brand-muted">Single Cast Mold</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRODUCT CARD 5: Kolhapuri Ergonomic Footwear -->
+                <div class="product-item group bg-brand-bg border border-brand-border p-5 transition-all duration-300 hover:shadow-xl hover:border-brand-terracotta/40" data-category="acc">
+                    <div class="relative image-zoom-container bg-white overflow-hidden mb-5">
+                        <img 
+                            src="images/kolhapuri.png" 
+                            alt="Reengineered Minimalist Kolhapuri Slide"
+                            class="w-full h-80 object-cover"
+                            onerror="this.src='https://images.unsplash.com/photo-1560343090-f0409e92791a?auto=format&fit=crop&w=800&q=80'"
+                        />
+                        <span class="absolute top-3 left-3 bg-brand-dark text-white text-[10px] font-mono px-2.5 py-1 uppercase tracking-wider">
+                            Kolhapur Leather
+                        </span>
+                        <button onclick="quickAdd('Modern Architectural Kolhapuri Leather Slide', 3900)" class="absolute bottom-3 right-3 bg-white text-brand-dark p-3 rounded-full shadow-md hover:bg-brand-terracotta hover:text-white transition">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-serif text-xl font-medium text-brand-dark group-hover:text-brand-terracotta transition">Architectural Kolhapuri Leather Slide</h3>
+                            <span class="font-mono text-sm font-semibold text-brand-dark">₹3,900</span>
+                        </div>
+                        <p class="text-xs text-brand-muted">Craft: Vegetable Tanned Leather & Hand-braiding • Maharashtra</p>
+                        <p class="text-xs text-brand-dark/80 line-clamp-2 font-light pt-1">
+                            Traditional hand-braided toe loop re-engineered with cushioned memory footbed for contemporary urban walking.
+                        </p>
+                        <div class="pt-4 flex items-center justify-between border-t border-brand-border/60">
+                            <button onclick="openProductModal('kolhapuri')" class="text-xs font-semibold uppercase tracking-wider text-brand-terracotta hover:underline flex items-center gap-1">
+                                Explore The Piece <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                            <span class="text-[10px] font-mono text-brand-muted">Veg-Tanned</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRODUCT CARD 6: Jaipur Lah (Lac) Bangles -->
+                <div class="product-item group bg-brand-bg border border-brand-border p-5 transition-all duration-300 hover:shadow-xl hover:border-brand-terracotta/40" data-category="acc">
+                    <div class="relative image-zoom-container bg-white overflow-hidden mb-5">
+                        <img 
+                            src="images/bangles.png" 
+                            alt="Jaipur Lah Lac Hand-Beaded Bangles"
+                            class="w-full h-80 object-cover"
+                            onerror="this.src='https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80'"
+                        />
+                        <span class="absolute top-3 left-3 bg-brand-dark text-white text-[10px] font-mono px-2.5 py-1 uppercase tracking-wider">
+                            Jaipur Lac Guild
+                        </span>
+                        <button onclick="quickAdd('Jaipur Lah Matte Terracotta & Brass Bangles (Set of 4)', 2800)" class="absolute bottom-3 right-3 bg-white text-brand-dark p-3 rounded-full shadow-md hover:bg-brand-terracotta hover:text-white transition">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-serif text-xl font-medium text-brand-dark group-hover:text-brand-terracotta transition">Jaipur Lah Matte Lac & Brass Cuffs</h3>
+                            <span class="font-mono text-sm font-semibold text-brand-dark">₹2,800</span>
+                        </div>
+                        <p class="text-xs text-brand-muted">Craft: Natural Tree Resin (Lah) Molding • Maniharon Rasta, Jaipur</p>
+                        <p class="text-xs text-brand-dark/80 line-clamp-2 font-light pt-1">
+                            Purified natural lac resin mixed with earth pigments and hand-inlaid raw brass wire. Warm, organic tactile feel.
+                        </p>
+                        <div class="pt-4 flex items-center justify-between border-t border-brand-border/60">
+                            <button onclick="openProductModal('lah-bangles')" class="text-xs font-semibold uppercase tracking-wider text-brand-terracotta hover:underline flex items-center gap-1">
+                                Explore The Piece <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                            <span class="text-[10px] font-mono text-brand-muted">Natural Resin</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- View All CTA -->
+            <div class="text-center mt-16">
+                <a href="#editions" class="inline-flex items-center gap-3 px-8 py-4 bg-transparent border border-brand-dark text-brand-dark text-xs uppercase tracking-widest font-semibold hover:bg-brand-dark hover:text-white transition">
+                    Explore Limited KALA Editions <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. “HOW IT LIVES” SECTION -->
+    <section id="lifestyle" class="py-24 px-6 md:px-12 bg-brand-dark text-white relative">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="max-w-2xl mb-16">
+                <span class="text-xs font-semibold uppercase tracking-widest text-brand-ochre block mb-3">Contextual Living</span>
+                <h2 class="text-4xl sm:text-5xl font-serif font-light leading-tight">
+                    Made for the way we live now.
+                </h2>
+                <p class="text-white/70 text-sm sm:text-base mt-4 font-light leading-relaxed">
+                    Craft doesn't belong only in museum glass cases, annual festival fairs, or dusty souvenir stands. It belongs in contemporary urban homes, everyday wardrobes, and mindful modern rituals.
+                </p>
+            </div>
+
+            <!-- Interactive Hotspot Room Canvas -->
+            <div class="relative rounded-sm overflow-hidden border border-white/10 shadow-2xl">
+                <img 
+                    src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1600&q=80" 
+                    alt="Contemporary Interior with Indian Craft Objects"
+                    class="w-full h-[500px] md:h-[650px] object-cover filter brightness-[0.9]"
+                    onerror="this.src='https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1600&q=80'"
+                />
+
+                <!-- Hotspot 1: Blue Pottery Vase -->
+                <div class="absolute top-[35%] left-[45%] group">
+                    <button class="w-8 h-8 rounded-full bg-brand-terracotta text-white flex items-center justify-center font-mono text-xs font-bold animate-bounce shadow-lg ring-4 ring-white/20">
+                        01
+                    </button>
+                    <div class="hidden group-hover:block absolute bottom-10 left-1/2 -translate-x-1/2 w-64 p-4 glass-nav bg-brand-dark/95 border border-white/20 text-white rounded shadow-2xl z-20">
+                        <span class="text-[10px] font-mono text-brand-ochre uppercase block">Jaipur Craft</span>
+                        <h4 class="font-serif text-base font-semibold">Cobalt Sculptural Vessel</h4>
+                        <p class="text-xs text-white/70 mt-1">Paired with raw concrete architectural dining tables.</p>
+                        <span class="text-xs font-mono font-bold text-white mt-2 block">₹4,800</span>
+                    </div>
+                </div>
+
+                <!-- Hotspot 2: Silk Throw -->
+                <div class="absolute top-[60%] left-[25%] group">
+                    <button class="w-8 h-8 rounded-full bg-brand-ochre text-white flex items-center justify-center font-mono text-xs font-bold shadow-lg ring-4 ring-white/20">
+                        02
+                    </button>
+                    <div class="hidden group-hover:block absolute bottom-10 left-1/2 -translate-x-1/2 w-64 p-4 glass-nav bg-brand-dark/95 border border-white/20 text-white rounded shadow-2xl z-20">
+                        <span class="text-[10px] font-mono text-brand-ochre uppercase block">Tamil Nadu Handloom</span>
+                        <h4 class="font-serif text-base font-semibold">Kanjeevaram Silk Sofa Throw</h4>
+                        <p class="text-xs text-white/70 mt-1">Draped over minimalist Scandinavian bouclé sofa.</p>
+                        <span class="text-xs font-mono font-bold text-white mt-2 block">₹18,500</span>
+                    </div>
+                </div>
+
+                <!-- Hotspot 3: Dhokra Brass Art -->
+                <div class="absolute top-[48%] right-[22%] group">
+                    <button class="w-8 h-8 rounded-full bg-brand-terracotta text-white flex items-center justify-center font-mono text-xs font-bold shadow-lg ring-4 ring-white/20">
+                        03
+                    </button>
+                    <div class="hidden group-hover:block absolute bottom-10 left-1/2 -translate-x-1/2 w-64 p-4 glass-nav bg-brand-dark/95 border border-white/20 text-white rounded shadow-2xl z-20">
+                        <span class="text-[10px] font-mono text-brand-ochre uppercase block">Bengal Metalwork</span>
+                        <h4 class="font-serif text-base font-semibold">Bankura Dhokra Sculptural Totem</h4>
+                        <p class="text-xs text-white/70 mt-1">Accent piece on floating oak library shelf.</p>
+                        <span class="text-xs font-mono font-bold text-white mt-2 block">₹7,200</span>
+                    </div>
+                </div>
+
+                <!-- Lifestyle Overlay Bar -->
+                <div class="absolute bottom-6 left-6 right-6 p-6 bg-brand-dark/80 backdrop-blur-md border border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <p class="text-xs text-white/80 max-w-xl font-light">
+                        <strong class="text-white font-medium">Design Insight:</strong> Traditional Indian objects carry rich material weight that grounds cold modern minimalism with warmth, history, and human touch.
+                    </p>
+                    <a href="#edit" class="text-xs font-semibold uppercase tracking-widest text-brand-ochre hover:text-white transition flex items-center gap-2">
+                        View Interior Curation <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 6. MEET THE MAKER SECTION -->
+    <section id="makers" class="py-24 px-6 md:px-12 bg-white">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left: Artisan Portrait Gallery -->
+                <div class="lg:col-span-6 grid grid-cols-2 gap-4">
+                    <div class="space-y-4">
+                        <div class="image-zoom-container rounded-sm overflow-hidden shadow-md">
+                            <img 
+                                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80" 
+                                alt="Smt. Kamala Devi Master Weaver"
+                                class="w-full h-64 object-cover"
+                            />
+                        </div>
+                        <div class="bg-brand-bg p-5 border border-brand-border">
+                            <span class="text-[10px] font-mono text-brand-terracotta uppercase">Craft Specialty</span>
+                            <h4 class="font-serif text-lg font-semibold text-brand-dark">3-Ply Korvai Silk Weaving</h4>
+                            <p class="text-xs text-brand-muted mt-1">42 Years Active Guild Leadership</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 pt-8">
+                        <div class="bg-brand-dark text-white p-5 shadow-md">
+                            <span class="text-3xl font-serif text-brand-ochre block">70%</span>
+                            <p class="text-xs text-white/80 mt-1 uppercase tracking-wider font-semibold">
+                                Direct Revenue Share to Artisan Guilds
+                            </p>
+                        </div>
+                        <div class="image-zoom-container rounded-sm overflow-hidden shadow-md">
+                            <img 
+                                src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" 
+                                alt="Artisan Hands Weaving Silk"
+                                class="w-full h-64 object-cover"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Editorial Artisan Bio -->
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-xs font-semibold uppercase tracking-widest text-brand-terracotta block">Master Craft Practitioner</span>
+                    
+                    <h2 class="text-4xl sm:text-5xl font-serif text-brand-dark leading-tight">
+                        Meet Smt. Kamala Devi <br/>
+                        <span class="italic text-brand-terracotta font-normal">Kanchipuram, Tamil Nadu</span>
+                    </h2>
+
+                    <blockquote class="text-lg font-serif italic text-brand-dark/90 border-l-2 border-brand-terracotta pl-6 py-1">
+                        "When I loom silk, I do not just interlace threads. I am preserving a rhythm that my grandmother taught me when I was nine years old. KALA gives our craft the modern respect and fair value it truly deserves."
+                    </blockquote>
+
+                    <p class="text-sm text-brand-muted leading-relaxed font-light">
+                        Kamala Devi leads a self-governed guild of 18 master women weavers in Kanchipuram. Under KALA’s co-creation program, her cluster works directly with contemporary designers to adapt traditional motifs into minimalist home throws and unisex stoles.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-6 pt-4 border-t border-brand-border text-xs">
+                        <div>
+                            <span class="text-brand-muted uppercase text-[10px] tracking-widest block">Region</span>
+                            <span class="font-semibold text-brand-dark">Kanchipuram Guild Cluster</span>
+                        </div>
+                        <div>
+                            <span class="text-brand-muted uppercase text-[10px] tracking-widest block">Primary Technique</span>
+                            <span class="font-semibold text-brand-dark">Pure Mulberry Intersect Weave</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 flex items-center gap-6">
+                        <button onclick="openMakersDrawer()" class="px-8 py-4 bg-brand-dark text-white text-xs uppercase tracking-widest font-semibold hover:bg-brand-terracotta transition">
+                            Meet More Guild Masters →
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 7. “TRADITION → TODAY” COMPARISON -->
+    <section class="py-24 px-6 md:px-12 bg-brand-bg border-t border-brand-border">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-semibold uppercase tracking-widest text-brand-terracotta block mb-3">Evolutionary Strategy</span>
+                <h2 class="text-4xl sm:text-5xl font-serif text-brand-dark">
+                    Tradition doesn't have to stay in the past.
+                </h2>
+                <p class="text-sm text-brand-muted mt-3 font-light">
+                    KALA bridges historical craft execution with contemporary form factors, converting forgotten ethnic souvenirs into desirable modern design icons.
+                </p>
+            </div>
+
+            <!-- Comparison Cards Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- THEN Card -->
+                <div class="bg-white p-8 border border-brand-border relative">
+                    <span class="inline-block px-3 py-1 bg-gray-200 text-gray-700 text-[10px] font-mono uppercase tracking-widest font-bold mb-6">
+                        THEN — Traditional Marketplace Model
+                    </span>
+                    <div class="aspect-video bg-gray-100 overflow-hidden mb-6 relative">
+                        <img 
+                            src="https://images.unsplash.com/photo-1590736969955-71cc94801759?auto=format&fit=crop&w=800&q=80" 
+                            alt="Traditional Craft Stall"
+                            class="w-full h-full object-cover opacity-80 filter grayscale"
+                        />
+                        <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+                            <span class="bg-white/90 text-brand-dark text-xs uppercase tracking-widest px-4 py-2 font-bold">Crowded Marketplace Product</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-3 text-xs text-brand-muted">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-xmark text-red-500"></i> Heavy discount-driven, souvenir-oriented selling</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-xmark text-red-500"></i> Unclear pricing rationale and anonymous makers</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-xmark text-red-500"></i> Overly ornate patterns unsuitable for modern homes</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-xmark text-red-500"></i> Low artisan income margin trapped in middleman chains</li>
+                    </ul>
+                </div>
+
+                <!-- NOW Card -->
+                <div class="bg-brand-dark text-white p-8 border border-brand-terracotta relative shadow-xl">
+                    <span class="inline-block px-3 py-1 bg-brand-terracotta text-white text-[10px] font-mono uppercase tracking-widest font-bold mb-6">
+                        NOW — KALA Contemporary Design Brand
+                    </span>
+                    <div class="aspect-video bg-gray-800 overflow-hidden mb-6 relative">
+                        <img 
+                            src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80" 
+                            alt="Contemporary Design Curation"
+                            class="w-full h-full object-cover"
+                        />
+                        <div class="absolute inset-0 bg-brand-terracotta/20 flex items-center justify-center">
+                            <span class="bg-brand-dark text-brand-ochre text-xs uppercase tracking-widest px-4 py-2 font-bold border border-brand-ochre/30">Curated Design Experience</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-3 text-xs text-white/80">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-ochre"></i> Editorial storytelling & transparent craft economics</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-ochre"></i> Full artisan guild attribution & direct revenue share</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-ochre"></i> Refined minimalist silhouettes engineered for global living</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-ochre"></i> Limited collector editions with high perceived brand equity</li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 8. LIMITED KALA EDITIONS -->
+    <section id="editions" class="py-24 px-6 md:px-12 bg-white">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="p-8 md:p-16 bg-gradient-to-r from-brand-card via-brand-bg to-brand-card border border-brand-border">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-5 space-y-6">
+                        <span class="inline-block px-3 py-1 bg-brand-terracotta text-white text-[10px] font-mono uppercase tracking-widest">
+                            Exclusive Drop 01
+                        </span>
+                        
+                        <h2 class="text-4xl sm:text-5xl font-serif text-brand-dark">
+                            EDITION 01 — Bengal & Kashmir / Reimagined
+                        </h2>
+
+                        <p class="text-sm text-brand-muted leading-relaxed font-light">
+                            A limited collection of 50 individually numbered pieces combining Bengal Kantha structural embroidery with raw Kashmiri hand-spun cashmere.
+                        </p>
+
+                        <div class="p-4 bg-white border border-brand-border flex justify-between items-center text-xs">
+                            <div>
+                                <span class="text-brand-muted block uppercase text-[10px]">Availability</span>
+                                <span class="font-bold text-brand-dark font-mono">14 / 50 Remaining</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-brand-muted block uppercase text-[10px]">Edition Price</span>
+                                <span class="font-bold text-brand-terracotta font-mono text-sm">₹32,000</span>
+                            </div>
+                        </div>
+
+                        <button onclick="quickAdd('EDITION 01 — Bengal Kantha x Cashmere Parka', 32000)" class="w-full py-4 bg-brand-dark text-white text-xs uppercase tracking-widest font-semibold hover:bg-brand-terracotta transition">
+                            Reserve Edition Piece #15 →
+                        </button>
+                    </div>
+
+                    <div class="lg:col-span-7 grid grid-cols-2 gap-4">
+                        <div class="image-zoom-container rounded-sm overflow-hidden shadow-lg">
+                            <img 
+                                src="https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80" 
+                                alt="Bengal Kantha Embroidery Detail"
+                                class="w-full h-80 object-cover"
+                            />
+                        </div>
+                        <div class="image-zoom-container rounded-sm overflow-hidden shadow-lg pt-8">
+                            <img 
+                                src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80" 
+                                alt="Kashmiri Cashmere Detail"
+                                class="w-full h-80 object-cover"
+                            />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 9. KALA JOURNAL SECTION -->
+    <section id="journal" class="py-24 px-6 md:px-12 bg-brand-bg border-t border-brand-border">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-widest text-brand-terracotta block mb-2">Editorial & Culture</span>
+                    <h2 class="text-4xl sm:text-5xl font-serif text-brand-dark">The KALA Journal</h2>
+                </div>
+                <p class="text-sm text-brand-muted max-w-md font-light">
+                    Essays on slow craft economics, material provenance, and modern Indian design philosophy.
+                </p>
+            </div>
+
+            <!-- Journal Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Journal Article 1 -->
+                <article class="bg-white border border-brand-border p-6 flex flex-col justify-between hover:shadow-xl transition group">
+                    <div class="space-y-4">
+                        <div class="aspect-video bg-brand-card overflow-hidden">
+                            <img 
+                                src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80" 
+                                alt="Hands working on craft"
+                                class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                            />
+                        </div>
+                        <span class="text-[10px] font-mono text-brand-terracotta uppercase tracking-wider block">Economics of Craft</span>
+                        <h3 class="font-serif text-2xl font-medium text-brand-dark group-hover:text-brand-terracotta transition">
+                            Why does handmade cost more? The math behind slow design.
+                        </h3>
+                        <p class="text-xs text-brand-muted leading-relaxed font-light">
+                            Deconstructing the 180-hour production timeline of authentic Kashmiri Pashmina versus fast fashion synthetic imitations.
+                        </p>
+                    </div>
+                    <button onclick="readArticle('cost')" class="mt-8 pt-4 border-t border-brand-border text-xs uppercase tracking-widest font-semibold text-brand-dark hover:text-brand-terracotta flex items-center justify-between">
+                        Read Story <span>→</span>
+                    </button>
+                </article>
+
+                <!-- Journal Article 2 -->
+                <article class="bg-white border border-brand-border p-6 flex flex-col justify-between hover:shadow-xl transition group">
+                    <div class="space-y-4">
+                        <div class="aspect-video bg-brand-card overflow-hidden">
+                            <img 
+                                src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80" 
+                                alt="Jaipur pottery ceramics"
+                                class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                            />
+                        </div>
+                        <span class="text-[10px] font-mono text-brand-terracotta uppercase tracking-wider block">Material Study</span>
+                        <h3 class="font-serif text-2xl font-medium text-brand-dark group-hover:text-brand-terracotta transition">
+                            Inside the making of a Jaipur Blue Quartz Vessel.
+                        </h3>
+                        <p class="text-xs text-brand-muted leading-relaxed font-light">
+                            How a clay-less blend of quartz stone frit, Multani earth, and cobalt oxide creates an iconic indestructible blue ceramic.
+                        </p>
+                    </div>
+                    <button onclick="readArticle('pottery')" class="mt-8 pt-4 border-t border-brand-border text-xs uppercase tracking-widest font-semibold text-brand-dark hover:text-brand-terracotta flex items-center justify-between">
+                        Read Story <span>→</span>
+                    </button>
+                </article>
+
+                <!-- Journal Article 3 -->
+                <article class="bg-white border border-brand-border p-6 flex flex-col justify-between hover:shadow-xl transition group">
+                    <div class="space-y-4">
+                        <div class="aspect-video bg-brand-card overflow-hidden">
+                            <img 
+                                src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80" 
+                                alt="Modern interior with craft"
+                                class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                            />
+                        </div>
+                        <span class="text-[10px] font-mono text-brand-terracotta uppercase tracking-wider block">Interior Trends</span>
+                        <h3 class="font-serif text-2xl font-medium text-brand-dark group-hover:text-brand-terracotta transition">
+                            5 Indian craft techniques shaping global modern interiors.
+                        </h3>
+                        <p class="text-xs text-brand-muted leading-relaxed font-light">
+                            From Dhokra bronze castings in Paris lofts to Kanjeevaram silks in Scandinavian living rooms.
+                        </p>
+                    </div>
+                    <button onclick="readArticle('trends')" class="mt-8 pt-4 border-t border-brand-border text-xs uppercase tracking-widest font-semibold text-brand-dark hover:text-brand-terracotta flex items-center justify-between">
+                        Read Story <span>→</span>
+                    </button>
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-dark text-white pt-20 pb-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-white/10">
+                
+                <!-- Brand Info (5 Cols) -->
+                <div class="md:col-span-5 space-y-6">
+                    <span class="text-3xl font-serif tracking-widest block">KALA</span>
+                    <p class="text-xs text-white/60 max-w-sm font-light leading-relaxed">
+                        KALA is a contemporary Indian craft and design brand connecting regional artisan guilds with modern living aesthetics through slow, transparent design.
+                    </p>
+                    <div class="pt-2 flex items-center gap-4 text-white/70">
+                        <a href="#" class="hover:text-brand-ochre transition text-sm"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="hover:text-brand-ochre transition text-sm"><i class="fa-brands fa-pinterest"></i></a>
+                        <a href="#" class="hover:text-brand-ochre transition text-sm"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <!-- Footer Navigation Links -->
+                <div class="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8 text-xs">
+                    <div>
+                        <span class="font-mono uppercase tracking-widest text-brand-ochre block mb-4">Navigation</span>
+                        <ul class="space-y-2.5 text-white/70 font-light">
+                            <li><a href="#discover" class="hover:text-white transition">Discover</a></li>
+                            <li><a href="#edit" class="hover:text-white transition">The KALA Edit</a></li>
+                            <li><a href="#process" class="hover:text-white transition">How It's Made</a></li>
+                            <li><a href="#makers" class="hover:text-white transition">Artisan Guilds</a></li>
+                            <li><a href="#lifestyle" class="hover:text-white transition">How It Lives</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <span class="font-mono uppercase tracking-widest text-brand-ochre block mb-4">Craft Clusters</span>
+                        <ul class="space-y-2.5 text-white/70 font-light">
+                            <li>Jaipur Blue Pottery</li>
+                            <li>Kanchipuram Silks</li>
+                            <li>Srinagar Pashmina</li>
+                            <li>Bankura Dhokra Metal</li>
+                            <li>Kolhapur Leather Guild</li>
+                            <li>Jaipur Lac Artisans</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <span class="font-mono uppercase tracking-widest text-brand-ochre block mb-4">Rebranding Concept</span>
+                        <p class="text-white/60 text-[11px] leading-relaxed mb-4">
+                            Designed as a strategic prototype for competition showcasing the brand evolution from marketplace to high-end design house.
+                        </p>
+                        <button onclick="toggleStrategyModal()" class="text-brand-ochre underline hover:text-white font-medium text-[11px]">
+                            View Strategy Deck →
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-[11px] text-white/50 gap-4 font-light">
+                <div>© 2026 KALA Design Heritage House. All Rights Reserved.</div>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:underline">Traceability Protocol</a>
+                    <a href="#" class="hover:underline">Artisan Revenue Charter</a>
+                    <a href="#" class="hover:underline">Terms of Curation</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <!-- 1. PRODUCT DETAIL DEEP-DIVE MODAL -->
+    <div id="product-modal" class="fixed inset-0 bg-brand-dark/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 md:p-8">
+        <div class="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-brand-border p-6 md:p-10 relative">
+            <button onclick="closeProductModal()" class="absolute top-6 right-6 text-2xl text-brand-dark hover:text-brand-terracotta">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start" id="modal-content">
+                <!-- Dynamically populated via Javascript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. REBRANDING STRATEGY MODAL FOR JUDGES -->
+    <div id="strategy-modal" class="fixed inset-0 bg-brand-dark/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 md:p-8">
+        <div class="bg-brand-bg max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-brand-terracotta p-8 md:p-12 relative text-brand-dark">
+            <button onclick="toggleStrategyModal()" class="absolute top-6 right-6 text-2xl text-brand-dark hover:text-brand-terracotta">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-terracotta block mb-2">Competition Strategy Deck</span>
+            <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-dark mb-6">KALA Brand Evolution Framework</h2>
+
+            <div class="space-y-6 text-xs md:text-sm text-brand-dark/80 leading-relaxed">
+                
+                <div class="p-4 bg-white border-l-4 border-brand-terracotta shadow-sm">
+                    <h3 class="font-bold text-base text-brand-dark mb-1">Core Strategic Shift</h3>
+                    <p class="text-xs">
+                        From a generic transactional marketplace ("Buy cheap Indian handicrafts") to a modern cultural design house ("Invest in living Indian art and slow human craft").
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-4 bg-white border border-brand-border">
+                        <h4 class="font-bold text-brand-dark text-xs uppercase tracking-wider mb-2">Old Marketplace Model</h4>
+                        <ul class="space-y-1.5 text-xs text-brand-muted">
+                            <li>• Price-focused commodity listing</li>
+                            <li>• 500+ unverified random products</li>
+                            <li>• Anonymous maker profiles</li>
+                            <li>• Discount-heavy banner clutter</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-4 bg-brand-dark text-white">
+                        <h4 class="font-bold text-brand-ochre text-xs uppercase tracking-wider mb-2">New KALA Design Model</h4>
+                        <ul class="space-y-1.5 text-xs text-white/80">
+                            <li>• Editorial value-add story & provenance</li>
+                            <li>• Highly curated 10-piece seasonal edits</li>
+                            <li>• 70% direct artisan revenue equity</li>
+                            <li>• Modern interior lifestyle integration</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-sm text-brand-dark uppercase tracking-wider mb-2">Why This Solves Craft Pricing Rationale</h3>
+                    <p>
+                        When buyers see a ₹4,800 Jaipur Blue Pottery vessel on an Amazon-style listing, they compare it with a ₹400 factory ceramic cup. By presenting the 42-hour craft process, artisan guild attribution, quartz frit material study, and minimal styling context, KALA shifts the customer mindset from **price sensitivity** to **value appreciation**.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-brand-border flex justify-between items-center text-xs">
+                <span class="text-brand-muted">KALA Competition Entry Prototype</span>
+                <button onclick="toggleStrategyModal()" class="px-6 py-3 bg-brand-dark text-white uppercase tracking-widest font-semibold hover:bg-brand-terracotta">
+                    Close Strategy View
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. SLIDE-OUT CART DRAWER -->
+    <div id="cart-drawer" class="fixed inset-y-0 right-0 w-full max-w-md bg-white z-50 shadow-2xl border-l border-brand-border translate-x-full transition-transform duration-300 flex flex-col justify-between p-6">
+        <div>
+            <div class="flex justify-between items-center pb-6 border-b border-brand-border">
+                <span class="text-lg font-serif font-semibold text-brand-dark">Your Curated Bag (<span id="bag-count-text">2</span>)</span>
+                <button onclick="toggleCart()" class="text-xl text-brand-dark hover:text-brand-terracotta"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="py-6 space-y-4 overflow-y-auto max-h-[60vh]" id="cart-items-container">
+                <!-- Cart Item 1 -->
+                <div class="flex gap-4 p-3 bg-brand-bg border border-brand-border">
+                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=200&q=80" class="w-16 h-16 object-cover" />
+                    <div class="flex-1 text-xs">
+                        <h4 class="font-serif font-semibold text-brand-dark text-sm">Jaipur Blue Cobalt Vessel</h4>
+                        <span class="text-brand-muted block">Jaipur Quartz Guild</span>
+                        <span class="font-mono font-bold text-brand-dark block mt-1">₹4,800</span>
+                    </div>
+                </div>
+
+                <!-- Cart Item 2 -->
+                <div class="flex gap-4 p-3 bg-brand-bg border border-brand-border">
+                    <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=200&q=80" class="w-16 h-16 object-cover" />
+                    <div class="flex-1 text-xs">
+                        <h4 class="font-serif font-semibold text-brand-dark text-sm">Kolhapuri Leather Slide</h4>
+                        <span class="text-brand-muted block">Maharashtra Guild</span>
+                        <span class="font-mono font-bold text-brand-dark block mt-1">₹3,900</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-6 border-t border-brand-border space-y-4">
+            <div class="flex justify-between items-center text-sm font-semibold">
+                <span>Subtotal (Direct Artisan Equity Included)</span>
+                <span class="font-mono text-base text-brand-terracotta" id="cart-subtotal">₹8,700</span>
+            </div>
+            <button onclick="alert('Demo Checkout: Thank you for evaluating KALA design brand prototype!')" class="w-full py-4 bg-brand-dark text-white text-xs uppercase tracking-widest font-semibold hover:bg-brand-terracotta transition">
+                Proceed to Checkout →
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Data Store for Process Stepper
+        const processData = [
+            {
+                num: "01",
+                tag: "Material Preparation • Jaipur, Rajasthan",
+                title: "Formulating the Dough-less Quartz Blend",
+                desc: "Unlike traditional clay pottery, Jaipur Blue Pottery uses no clay. Quartz stone powder, glass frit, Multani Mitti (Fuller's Earth), and natural tree gum are combined by hand to create a smooth, resilient paste.",
+                stat1: "Abdul Latif & Guild",
+                stat2: "3 Days Drying & Aging",
+                img: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                num: "02",
+                tag: "Hand Moulding • Jaipur Guild",
+                title: "Precision Press Moulding & Drying",
+                desc: "The quartz dough is pressed into open plaster moulds and lined with ash to prevent sticking. After shaping, it dries slowly in shade to prevent thermal cracking.",
+                stat1: "Master Artisan Craftsmen",
+                stat2: "5 Days Shade Curing",
+                img: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                num: "03",
+                tag: "Oxide Hand Painting • Mineral Pigments",
+                title: "Painting Cobalt & Copper Oxide Motifs",
+                desc: "Artisans paint traditional floral motifs directly onto the raw unglazed body using squirrel-hair brushes with natural cobalt oxide (for deep blue) and copper oxide (for turquoise).",
+                stat1: "Freehand Brushwork",
+                stat2: "18 Hours Detailed Paint",
+                img: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                num: "04",
+                tag: "Glazing & Kiln Fire • 1,100°C",
+                title: "Glass Glaze & Single Kiln Firing",
+                desc: "A glass glaze made of borax, zinc oxide, and potassium nitrate is applied. The pieces are fired once in traditional wood kilns at 1,100°C for 10 hours.",
+                stat1: "Wood Kiln Master",
+                stat2: "10 Hours High Firing",
+                img: "https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                num: "05",
+                tag: "Quality Inspection & Hand Polish",
+                title: "Cooling & Heritage Quality Seal",
+                desc: "The kiln cools over three days. Each vessel is inspected for glass clarity, polished with felt cloth, and signed by the artisan before receiving KALA's serial authenticity badge.",
+                stat1: "KALA Quality Guild",
+                stat2: "Lifetime Durability",
+                img: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80"
+            }
+        ];
+
+        let currentProcessStep = 0;
+
+        function setProcessStep(index) {
+            currentProcessStep = index;
+            const data = processData[index];
+            
+            document.getElementById('process-step-num').innerText = data.num;
+            document.getElementById('process-craft-tag').innerText = data.tag;
+            document.getElementById('process-title').innerText = data.title;
+            document.getElementById('process-desc').innerText = data.desc;
+            document.getElementById('process-stat-1').innerText = data.stat1;
+            document.getElementById('process-stat-2').innerText = data.stat2;
+            document.getElementById('process-img').src = data.img;
+
+            // Highlight Tab Buttons
+            const buttons = document.querySelectorAll('.process-tab-btn');
+            buttons.forEach((btn, i) => {
+                if(i === index) {
+                    btn.classList.add('border-brand-terracotta', 'text-brand-terracotta');
+                    btn.classList.remove('border-transparent', 'text-brand-muted');
+                } else {
+                    btn.classList.remove('border-brand-terracotta', 'text-brand-terracotta');
+                    btn.classList.add('border-transparent', 'text-brand-muted');
+                }
+            });
+        }
+
+        function nextProcessStep() {
+            currentProcessStep = (currentProcessStep + 1) % processData.length;
+            setProcessStep(currentProcessStep);
+        }
+
+        // Product Modal Data
+        const productDetails = {
+            'blue-pottery': {
+                title: 'Jaipur Blue Cobalt Sculptural Vessel',
+                price: '₹4,800',
+                craft: 'Jaipur Quartz & Glass Frit Firing',
+                artisan: 'Abdul Latif & Jaipur Guild',
+                story: 'This piece reinterprets the iconic 19th-century Jaipur Blue Pottery into a modern clean cylindrical silhouette. Free of lead or toxic glazes, it brings organic warmth and deep cobalt depth into contemporary interiors.',
+                time: '42 Hours Crafting',
+                share: '₹3,200 Direct Artisan Share',
+                img: 'https://www.google.com/imgres?q=Jaipur%20Blue%20Cobalt%20Sculptural%20Vessel&imgurl=https%3A%2F%2Fmedia.assettype.com%2Foutlooktraveller%2Fimport%2Foutlooktraveller%2Fpublic%2Fuploads%2Farticles%2Fexplore%2Fshutterstock_1596511075.jpg%3Fw%3D1000%26auto%3Dformat%252Ccompress%26fit%3Dmax%26format%3Dwebp%26dpr%3D1.0&imgrefurl=https%3A%2F%2Fwww.outlooktraveller.com%2Fexperiences%2Fheritage%2Fjaipur-blue-pottery-a-story-of-no-clay-pottery&docid=0fsvGxA064IEVM&tbnid=FH6nz_fupuvjtM&vet=12ahUKEwiHuoWTi4qXAxU_SmwGHQXDBBkQnPAOegUImAEQAA..i&w=1000&h=649&hcb=2&ved=2ahUKEwiHuoWTi4qXAxU_SmwGHQXDBBkQnPAOegUImAEQAA'
+            },
+            'kanjeevaram': {
+                title: 'Monochrome Kanjeevaram Silk Throw',
+                price: '₹18,500',
+                craft: 'Mulberry Silk Korvai Weave',
+                artisan: 'Smt. Kamala Devi, Tamil Nadu',
+                story: 'Hand-woven using pure mulberry silk yarn and muted gold zari threads. Re-engineered from heavy wedding saris into a versatile throw or evening wrap suited for minimalist lifestyle wardrobes.',
+                time: '14 Days Weaving',
+                share: '₹12,500 Direct Artisan Share',
+                img: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80'
+            },
+            'pashmina': {
+                title: 'Kashmiri Hand-Spun Pashmina Wrap',
+                price: '₹24,000',
+                craft: 'Changthangi Cashmere Hand-Spinning',
+                artisan: 'Srinagar Craft Guild',
+                story: 'Sourced from high-altitude Changthangi goats in Ladakh. Hand-spun on traditional wooden spinning wheels (charkha) and woven into a featherlight ombré drape.',
+                time: '180 Hours Spinning',
+                share: '₹16,800 Direct Artisan Share',
+                img: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80'
+            },
+            'dhokra': {
+                title: 'Bankura Dhokra Geometric Brass Sculpture',
+                price: '₹7,200',
+                craft: '4,000-Year Lost-Wax Brass Casting',
+                artisan: 'Ramesh Chandra & Bankura Guild',
+                story: 'Created using the ancient lost-wax casting technique. Every piece requires a unique hand-carved wax prototype that melts away during bronze pouring, making every single object one-of-one.',
+                time: '10 Days Crafting',
+                share: '₹4,900 Direct Artisan Share',
+                img: 'https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=800&q=80'
+            },
+            'kolhapuri': {
+                title: 'Architectural Kolhapuri Leather Slide',
+                price: '₹3,900',
+                craft: 'Vegetable Tanned Leather & Hand-braiding',
+                artisan: 'Kolhapur Shoemakers Guild',
+                story: 'Traditional Kolhapuri chappal re-engineered with ergonomic memory-cushion soles and vegetable-tanned full grain leather that patinas beautifully over time.',
+                time: '24 Hours Crafting',
+                share: '₹2,600 Direct Artisan Share',
+                img: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=80'
+            },
+            'lah-bangles': {
+                title: 'Jaipur Lah Matte Lac & Brass Cuffs',
+                price: '₹2,800',
+                craft: 'Natural Tree Resin Molding',
+                artisan: 'Maniharon Guild, Jaipur',
+                story: 'Purified natural lac resin extracted from Palas trees, heated gently over open flame and embedded with raw brass wire and earth pigments. Highly tactile and hypoallergenic.',
+                time: '16 Hours Crafting',
+                share: '₹1,900 Direct Artisan Share',
+                img: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80'
+            }
+        };
+
+        function openProductModal(key) {
+            const item = productDetails[key];
+            if (!item) return;
+
+            const content = `
+                <div class="md:col-span-6 bg-brand-bg p-4">
+                    <img src="${item.img}" class="w-full h-[400px] object-cover" />
+                </div>
+                <div class="md:col-span-6 space-y-6">
+                    <div>
+                        <span class="text-xs font-mono uppercase text-brand-terracotta tracking-widest font-bold">${item.craft}</span>
+                        <h3 class="text-3xl font-serif text-brand-dark font-medium mt-1">${item.title}</h3>
+                        <span class="text-2xl font-mono text-brand-dark font-bold mt-2 block">${item.price}</span>
+                    </div>
+
+                    <div class="p-4 bg-brand-bg border border-brand-border space-y-2 text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-brand-muted">Artisan Practitioner:</span>
+                            <span class="font-bold text-brand-dark">${item.artisan}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-brand-muted">Time to Make:</span>
+                            <span class="font-bold text-brand-dark">${item.time}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-brand-muted">Economic Transparency:</span>
+                            <span class="font-bold text-brand-terracotta">${item.share}</span>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-brand-dark/80 leading-relaxed font-light">${item.story}</p>
+
+                    <div class="pt-4 flex gap-4">
+                        <button onclick="quickAdd('${item.title}', 4800); closeProductModal();" class="flex-1 py-4 bg-brand-dark text-white text-xs uppercase tracking-widest font-semibold hover:bg-brand-terracotta transition">
+                            Add to Bag
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('modal-content').innerHTML = content;
+            document.getElementById('product-modal').classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+
+        // Toggle Strategy Modal
+        function toggleStrategyModal() {
+            const el = document.getElementById('strategy-modal');
+            el.classList.toggle('hidden');
+        }
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+
+        // Cart Drawer Handlers
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            drawer.classList.toggle('translate-x-full');
+        }
+
+        function quickAdd(name, price) {
+            const container = document.getElementById('cart-items-container');
+            const itemHtml = `
+                <div class="flex gap-4 p-3 bg-brand-bg border border-brand-border">
+                    <div class="w-16 h-16 bg-brand-dark/10 flex items-center justify-center text-brand-terracotta text-lg font-serif">K</div>
+                    <div class="flex-1 text-xs">
+                        <h4 class="font-serif font-semibold text-brand-dark text-sm">${name}</h4>
+                        <span class="text-brand-muted block">Direct Guild Sourced</span>
+                        <span class="font-mono font-bold text-brand-dark block mt-1">₹${price.toLocaleString()}</span>
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', itemHtml);
+            toggleCart();
+        }
+
+        function filterProducts(category) {
+            const items = document.querySelectorAll('.product-item');
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            const btns = document.querySelectorAll('.prod-filter-btn');
+            btns.forEach(btn => {
+                btn.classList.remove('bg-brand-dark', 'text-white');
+                btn.classList.add('border-brand-border', 'text-brand-dark');
+            });
+        }
+
+        function readArticle(type) {
+            alert("Reading Article Preview: KALA Journal deep-dive on craft economics and heritage techniques.");
+        }
+
+        function openMakersDrawer() {
+            alert("Artisan Guild Network: Connecting over 18 regional artisan clusters across Rajasthan, Tamil Nadu, West Bengal, Maharashtra & Jammu & Kashmir.");
+        }
+    </script>
+</body>
+</html>
